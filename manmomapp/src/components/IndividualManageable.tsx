@@ -4,7 +4,11 @@ import {Grid, Button} from 'semantic-ui-react';
 import { ThunkDispatch } from 'redux-thunk';
 import { RootState } from '../store';
 import { AppActions } from '../models/action';
-import { deleteManageable } from '../store/actions';
+import { 
+    toggledDoneStatusForManageable, 
+    updatingAllManageable, 
+    deleteManageable 
+} from '../store/actions';
 import { connect } from 'react-redux';
 
 export interface IIndividualManageableItemProps {
@@ -15,15 +19,27 @@ interface IIndividualManageableItemStateProps {}
 
 interface IIndividualManageableItemDispatchProps {
     deleteManageableItems: (id: string) => void;
+    toggledDoneStatusForManageable: (id: string) => void;
+    updatingAllManageable: (manageable: ManageableItem) => void;
 }
 
 type Props = IIndividualManageableItemProps & IIndividualManageableItemStateProps & IIndividualManageableItemDispatchProps;
 
-export class IIndividualManageableItem extends React.Component<Props> {
+export class IndividualManageableItem extends React.Component<Props> {
 
     private deleteManageableItem(id: string): void {
         let {deleteManageableItems} = this.props;
         deleteManageableItems(id);
+    }
+
+    private UpdateContent(manageableItem: ManageableItem): void {
+        let {updatingAllManageable} = this.props;
+        updatingAllManageable(manageableItem);
+    }
+
+    private ToggleContent(id: string): void {
+        let {toggledDoneStatusForManageable} = this.props;
+        toggledDoneStatusForManageable(id);
     }
 
     public render() {
@@ -37,15 +53,25 @@ export class IIndividualManageableItem extends React.Component<Props> {
                   <Grid.Column width={7}>
                       <h1>{`Title: ${manageableItem.title}`}</h1>
                       <h3>{`Due at: ${manageableItem.dueAt}`}</h3>
-                      <h3>{`Is Done: ${manageableItem.isDone}`}</h3>
+                      <h3>{`Task Status: ${manageableItem.isDone}`}</h3>
                       <h3>{`Moments Id: ${manageableItem.id}`}</h3>
                       <h3>{`User Id: ${manageableItem.userId}`}</h3>
                   </Grid.Column>
                   ><Grid.Column width={3}>
                       <Button
+                      onClick={() => this.ToggleContent(manageableItem.id)}
+                      color="green">
+                          Completed
+                      </Button>
+                      <Button
+                      onClick={() => this.UpdateContent(manageableItem)}
+                      color="blue">
+                          New Content
+                      </Button>
+                      <Button
                       onClick={() => this.deleteManageableItem(manageableItem.id)}
                       color="red">
-                          Delete The Moment
+                          Delete
                       </Button>
                   </Grid.Column>
               </Grid.Row>
@@ -67,10 +93,19 @@ const mapDispatchToProps = (
         deleteManageableItems: (id: string) => {
             dispatch(deleteManageable(id));
         },
+        toggledDoneStatusForManageable: (id: string) => {
+            dispatch(toggledDoneStatusForManageable(id));
+        },
+        updatingAllManageable: (manageable: ManageableItem) => {
+            dispatch(updatingAllManageable(manageable));
+        }
     };
 };
 
-export default connect<IIndividualManageableItemStateProps, IIndividualManageableItemDispatchProps, IIndividualManageableItemProps, RootState>(
+export default connect<IIndividualManageableItemStateProps, 
+IIndividualManageableItemDispatchProps, 
+IIndividualManageableItemProps, 
+RootState>(
     mapStateToProps,
     mapDispatchToProps
-)(IIndividualManageableItem);
+)(IndividualManageableItem);

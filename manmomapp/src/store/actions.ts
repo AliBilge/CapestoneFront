@@ -1,7 +1,12 @@
 import {ThunkAction} from "redux-thunk";
 import {RootState} from ".";
 import {AppActions} from "../models/action";
-import { GETTING_MANAGEABLE_ITEMS, DELETED_MANAGEABLE, CREATED_NEW_MANAGEABLE } from "./types";
+import {
+    GETTING_MANAGEABLE_ITEMS, 
+    CREATED_NEW_MANAGEABLE,
+    TOGGLED_DONE_STATUS_FOR_MANAGEABLE,
+    UPDATING_ALL_MANAGEABLE,
+    DELETED_MANAGEABLE} from "./types";
 import { ManageableItem } from "../models/ManageableItem";
 import agent from "../api/agent";
 
@@ -33,6 +38,38 @@ export function createNewManageable(manageableItem: ManageableItem): ThunkResult
         a.then(
             value => {
                 dispatch({type: CREATED_NEW_MANAGEABLE, newManageable: manageableItem})
+            },
+            reason => {
+                console.log(reason)
+            }
+        ).catch(error => console.log(error))
+        .then((response) => console.log(response));
+    }
+}
+
+export function toggledDoneStatusForManageable(id: string): ThunkResult<void> {
+    return (dispatch, getState) => {
+        let a = agent.ManageableApis.patch(id); //Api call.
+
+        a.then(
+            value => {
+                dispatch({type: TOGGLED_DONE_STATUS_FOR_MANAGEABLE, id: id})
+            },
+            reason => {
+                console.log(reason)
+            }
+        ).catch(error => console.log(error))
+        .then((response) => console.log(response));
+    }
+}
+
+export function updatingAllManageable(manageableItem: ManageableItem): ThunkResult<void> {
+    return (dispatch, getState) => {
+        let a = agent.ManageableApis.put(manageableItem); //Api call.
+
+        a.then(
+            value => {
+                dispatch({type: UPDATING_ALL_MANAGEABLE, manageableItem: manageableItem})
             },
             reason => {
                 console.log(reason)

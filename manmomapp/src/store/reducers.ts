@@ -1,5 +1,11 @@
 import {ManageableItem} from "../models/ManageableItem";
-import {ManageableActionTypes, GETTING_MANAGEABLE_ITEMS, CREATED_NEW_MANAGEABLE, DELETED_MANAGEABLE} from "./types";
+import {
+    ManageableActionTypes, 
+    GETTING_MANAGEABLE_ITEMS, 
+    CREATED_NEW_MANAGEABLE,
+    TOGGLED_DONE_STATUS_FOR_MANAGEABLE,
+    UPDATING_ALL_MANAGEABLE,
+    DELETED_MANAGEABLE} from "./types";
 
 
 export interface IState {
@@ -23,6 +29,24 @@ export function manageableReducer(state = defaultValue, action: ManageableAction
                     ...state,
                     manageableItems: [...state.manageableItems, action.newManageable]
                 }
+
+                case TOGGLED_DONE_STATUS_FOR_MANAGEABLE:
+                    let manageableItemToModify = state.manageableItems.filter(individualManageable => { return individualManageable.id === action.id })[0];
+                    manageableItemToModify.isDone = !manageableItemToModify.isDone;
+
+                    return{
+                        ...state,
+                        manageableItems: [...state.manageableItems.filter(IndividualManageableItem => IndividualManageableItem.id !== action.id), manageableItemToModify]
+                    }
+
+                case UPDATING_ALL_MANAGEABLE:
+                    let manageableItemToAnother = state.manageableItems.filter(IndividualManageable => { return IndividualManageable.id === action.manageableItem.id})[0];
+                    manageableItemToAnother.title = "Title has been changed";
+                    return {
+                        ...state,
+                        manageableItems: [...state.manageableItems.filter(IndividualManageable => IndividualManageable.id !== action.manageableItem.id), manageableItemToAnother]
+                    }
+
 
                 case DELETED_MANAGEABLE:
                     return {
