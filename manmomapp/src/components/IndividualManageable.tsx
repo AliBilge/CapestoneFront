@@ -51,11 +51,11 @@ export class IndividualManageableItem extends React.Component<Props> {
 
                   </Grid.Column>
                   <Grid.Column width={7}>
-                      <h1>{`Title: ${manageableItem.title}`}</h1>
+                      <h1>{`Task: ${manageableItem.title}`}</h1>
                       <h3>{`Due at: ${manageableItem.dueAt}`}</h3>
                       <h3>{`Task Status: ${manageableItem.isDone}`}</h3>
-                      <h3>{`Moments Id: ${manageableItem.id}`}</h3>
-                      <h3>{`User Id: ${manageableItem.userId}`}</h3>
+                      {/*<h3>{`Moments Id: ${manageableItem.id}`}</h3> */}
+                      
                   </Grid.Column>
                   ><Grid.Column width={3}>
                       <Button

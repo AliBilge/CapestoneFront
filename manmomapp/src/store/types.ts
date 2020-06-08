@@ -3,7 +3,6 @@ import {Action} from "redux";
 
 export interface ManageableState {
     manageableItems: ManageableItem[];
-    loading: boolean;
 }
 
 export const THUNK_ACTION = "THUNK_ACTION";

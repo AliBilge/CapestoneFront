@@ -3,5 +3,4 @@ export interface ManageableItem {
     isDone: boolean;
     title: string;
     dueAt: string;
-    userId: string;
 }
