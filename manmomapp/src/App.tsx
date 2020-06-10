@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ManageableItem} from './models/ManageableItem';
-import {Input, Button} from 'semantic-ui-react';
+import {Input, Button, Grid} from 'semantic-ui-react';
 import {Formik, Form, Field} from 'formik';
 import IndividualManageableItem from './components/IndividualManageable';
 import { AppActions } from './models/action';
@@ -8,10 +8,8 @@ import { RootState } from './store';
 import { ThunkDispatch } from 'redux-thunk';
 import { getManageableItems, createNewManageable} from './store/actions';
 import { connect } from 'react-redux';
-//import Timer from 'react-compound-timer';
-//import myTimer from './components/MyTimer';
-
-
+import TaskTimer from './components/TaskTimer';
+import BreakTimer from './components/BreakTimer';
 import Picker from './components/DatePicker'
 
 export interface IAppProps {
@@ -66,23 +64,41 @@ export class App extends React.Component<Props> {
         <div className="six wide column"></div>
       </div>
 
-      <div className="ui grid container">
-        <div className="six wide column"></div>
-        <div className="two wide column">
-          <Button className="circular orange ui icon button">
+{/*  ===============  Date slider  =====================*/}
+<div className="ui grid container">
+         {/*  ===============  Date slider  =====================*/}
+      <Grid container columns={5}> 
+        <Grid.Column></Grid.Column>
+        <Grid.Column>
+          <button className="circular orange ui icon button">
             <i className="angle left icon" />
-          </Button>
+          </button>
+        </Grid.Column>
+        <Grid.Column>
           <Picker />
-        </div>
+          <h2> Today's Date </h2>
+        </Grid.Column>
+        <Grid.Column>
+          <button className="circular orange ui icon button">
+            <i className="angle right icon " />
+          </button>
+        </Grid.Column>
+        <Grid.Column></Grid.Column>
+      </Grid>
 
-        <div className="four wide column">
-          <div id="dateToday"></div>
-          <div className="two wide column">
-            <Button className="circular orange ui icon button">
-              <i className="angle right icon " />
-            </Button>
-          </div>
-        </div>
+ {/*  ===============  Timers task block =====================*/}
+ <Grid container columns={5} stackable>
+        <Grid.Column></Grid.Column>
+        <Grid.Column className="timer">
+          < BreakTimer /><h4>BREAK TIME</h4>
+          </Grid.Column>
+          <Grid.Column></Grid.Column>
+          <Grid.Column className="timer">
+          <TaskTimer /><h4>TASK TIME</h4>
+        </Grid.Column>
+        <Grid.Column></Grid.Column>
+      </Grid>
+
         <div className="ui grid container">
           <div className="six wide column"></div>
           <div className="six wide column">
