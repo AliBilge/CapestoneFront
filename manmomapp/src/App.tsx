@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ManageableItem} from './models/ManageableItem';
-import {Grid, Input, Button} from 'semantic-ui-react';
+import {Input, Button} from 'semantic-ui-react';
 import {Formik, Form, Field} from 'formik';
 import IndividualManageableItem from './components/IndividualManageable';
 import { AppActions } from './models/action';
@@ -10,6 +10,7 @@ import { getManageableItems, createNewManageable} from './store/actions';
 import { connect } from 'react-redux';
 //import Timer from 'react-compound-timer';
 //import myTimer from './components/MyTimer';
+
 
 import Picker from './components/DatePicker'
 
@@ -58,38 +59,39 @@ export class App extends React.Component<Props> {
         <div className="five wide column"></div>
         <div className="two wide column">
           <i className="calendar check outline icon massive"></i>
-          <Picker />
-          
         </div>
         <div className="six wide column">
           <h1> Manageable Moments</h1>
         </div>
         <div className="six wide column"></div>
       </div>
+
       <div className="ui grid container">
         <div className="six wide column"></div>
         <div className="two wide column">
-          <button className="circular orange ui icon button">
-            <i className="angle left icon" />{" "}
-          </button>
+          <Button className="circular orange ui icon button">
+            <i className="angle left icon" />
+          </Button>
+          <Picker />
         </div>
+
         <div className="four wide column">
           <div id="dateToday"></div>
           <div className="two wide column">
-            <button className="circular orange ui icon button">
+            <Button className="circular orange ui icon button">
               <i className="angle right icon " />
-            </button>
+            </Button>
           </div>
         </div>
         <div className="ui grid container">
           <div className="six wide column"></div>
-          <div className="six wide column"><div className="timerFace">
-            </div>
-            
-            </div>
+          <div className="six wide column">
+            <div className="timerFace"></div>
+          </div>
             
           <div className="ui grid container">
             <div className="four wide column"></div>
+
             <div className="eight wide column">
               <div className="ui raised segments">
                 <div className="ui segment">
@@ -100,24 +102,44 @@ export class App extends React.Component<Props> {
                 </div>
               </div>
             </div>
+            
             <div className="ui grid container">
               <div className="four wide column"></div>
-              <div className="eight wide column">
+              <div className="eight wide column ui button segment">
                 <div className="ui raised segments">
                   <div className="ui segment">
                     <h4>Additional Tasks</h4>
                   </div>
-                  <div className="ui segment">
-                    <p>Link content together </p>
+
+                  {/** Formic added from here */}
+                  <div>
+                  {manageableLoop}
                   </div>
-                  <div className="ui segment">
-                    <p>Make it look beautiful </p>
-                  </div>
-                  <div className="ui button segment">
-                  <button className="tiny orange ui button"> Add Task</button>
-                  <button className="tiny orange ui button"> Remove Task</button>
-                  <button className="tiny orange ui button"> Change Day</button>
-                  </div>
+            <Formik
+              initialValues = {{
+                id: "0",
+                isDone: false,
+                title: ""
+              }}
+
+              onSubmit={(data: ManageableItem) => {
+                this.createNewManageable(data);
+              }}>
+                {({values, handleChange, handleSubmit, handleBlur}) => (
+                  <Form>
+                    <div>
+                      <Field placeholder="title..." name="title" type="input" as={Input} />
+                    </div>
+                    <div><br/>
+                      <Button
+                      type="submit" className="tiny orange ui button">
+                        Add Task
+                      </Button>   
+                    </div>
+                  </Form>
+                )}
+
+            </Formik>   
                 </div>
               </div>
             </div>
@@ -130,45 +152,8 @@ export class App extends React.Component<Props> {
         </div>
       </div>
       </div>
-
-        {/**Trinas code ends */}
-        <Grid centered>
-          <Grid.Row>
-            {manageableLoop}
-          </Grid.Row>
-
-          <Grid.Row>
-            <Formik
-            initialValues = {{
-              id: "0",
-              isDone: false,
-              title: "",
-              dueAt: "2020-01-06T17:08:19",
-              userId: ""
-             }}
-            onSubmit={(data: ManageableItem) => {
-              this.createNewManageable(data);
-            }}>
-              {({values, handleChange, handleBlur}) => (
-                <Form>
-                  <div>
-                    <h3>Create Task</h3>
-                    <Field placeholder="title..." name="title" type="input" as={Input} />
-                  </div>
-                  <div>
-                    <Button
-                    type="submit" color="green">
-                      Submit
-                    </Button>
-                  </div>
-                </Form>
-              )}
-
-            </Formik>
-          </Grid.Row>
-        </Grid>
-
       </React.Fragment>
+        
     );
   }
 }

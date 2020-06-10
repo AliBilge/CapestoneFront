@@ -1,6 +1,7 @@
 export interface ManageableItem {
-    id: string;
+    id: any;
     isDone: boolean;
     title: string;
-    dueAt: string;
+    
 }
+

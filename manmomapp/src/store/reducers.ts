@@ -41,7 +41,7 @@ export function manageableReducer(state = defaultValue, action: ManageableAction
 
                 case UPDATING_ALL_MANAGEABLE:
                     let manageableItemToAnother = state.manageableItems.filter(IndividualManageable => { return IndividualManageable.id === action.manageableItem.id})[0];
-                    manageableItemToAnother.title = "Title has been changed";
+                    manageableItemToAnother.title = "priority";
                     return {
                         ...state,
                         manageableItems: [...state.manageableItems.filter(IndividualManageable => IndividualManageable.id !== action.manageableItem.id), manageableItemToAnother]

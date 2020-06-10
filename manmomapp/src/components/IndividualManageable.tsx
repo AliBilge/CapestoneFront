@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ManageableItem } from '../models/ManageableItem';
-import {Grid, Button} from 'semantic-ui-react';
+import {Button} from 'semantic-ui-react';
 import { ThunkDispatch } from 'redux-thunk';
 import { RootState } from '../store';
 import { AppActions } from '../models/action';
@@ -45,44 +45,30 @@ export class IndividualManageableItem extends React.Component<Props> {
     public render() {
         let {manageableItem} = this.props;
         return (
-          <Grid celled>
-              <Grid.Row>
-                  <Grid.Column width={3}>
-
-                  </Grid.Column>
-                  <Grid.Column width={7}>
-                      <h1>{`Task: ${manageableItem.title}`}</h1>
-                      <h3>{`Due at: ${manageableItem.dueAt}`}</h3>
-                      <h3>{`Task Status: ${manageableItem.isDone}`}</h3>
-                      {/*<h3>{`Moments Id: ${manageableItem.id}`}</h3> */}
-                      
-                  </Grid.Column>
-                  ><Grid.Column width={3}>
-                      <Button
-                      onClick={() => this.ToggleContent(manageableItem.id)}
-                      color="green">
-                          Completed
-                      </Button>
-                      <Button
-                      onClick={() => this.UpdateContent(manageableItem)}
-                      color="blue">
-                          New Content
-                      </Button>
-                      <Button
-                      onClick={() => this.deleteManageableItem(manageableItem.id)}
-                      color="red">
-                          Delete
-                      </Button>
-                  </Grid.Column>
-              </Grid.Row>
-          </Grid>
+            <div>
+                <div className="ui segment">
+                    <h3>{`${manageableItem.title}`}</h3>
+                    <p>{`Competed : ${manageableItem.isDone}`} </p>
+                </div>
+                <Button className="tiny orange ui button"
+                    onClick={() => this.UpdateContent(manageableItem)}>
+                    Priority
+                </Button>
+                <Button className="tiny orange ui button" 
+                    onClick={() => this.ToggleContent(manageableItem.id)}>
+                    Completed
+                </Button>
+                <Button className="tiny orange ui button" 
+                    onClick={() => this.deleteManageableItem(manageableItem.id)}>
+                    Delete
+                </Button>
+            </div>   
         );
     }
 }
 
 const mapStateToProps = (state: RootState) => {
     return {
-
     }
 }
 
