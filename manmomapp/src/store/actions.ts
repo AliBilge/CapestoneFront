@@ -42,7 +42,8 @@ export function createNewManageable(manageableItem: ManageableItem): ThunkResult
             reason => {
                 console.log(reason)
             }
-        ).catch(error => console.log(error.response))
+        )
+        .catch(error => console.log(error.response))
         .then((response) => console.log(response));
     }
 }

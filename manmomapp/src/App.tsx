@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import TaskTimer from './components/TaskTimer';
 import BreakTimer from './components/BreakTimer';
 import Picker from './components/DatePicker'
+import './App.css';
 
 export interface IAppProps {
   manageableItemList?: ManageableItem[];
@@ -50,8 +51,6 @@ export class App extends React.Component<Props> {
     return (
       <React.Fragment>
 
-        {/**Trinas code */}
-
         <div className="App">
       <div className="ui padded grid container">
         <div className="five wide column"></div>
@@ -66,7 +65,7 @@ export class App extends React.Component<Props> {
 
 {/*  ===============  Date slider  =====================*/}
 <div className="ui grid container">
-         {/*  ===============  Date slider  =====================*/}
+        
       <Grid container columns={5}> 
         <Grid.Column></Grid.Column>
         <Grid.Column>
@@ -102,7 +101,7 @@ export class App extends React.Component<Props> {
         <div className="ui grid container">
           <div className="six wide column"></div>
           <div className="six wide column">
-            <div className="timerFace"></div>
+            
           </div>
             
           <div className="ui grid container">
@@ -127,7 +126,7 @@ export class App extends React.Component<Props> {
                     <h4>Additional Tasks</h4>
                   </div>
 
-                  {/** Formic added from here */}
+      {/** Formic added from here */}
                   <div>
                   {manageableLoop}
                   </div>
