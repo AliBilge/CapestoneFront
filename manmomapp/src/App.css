@@ -1,5 +1,10 @@
+body {
+  margin-top: 50px;
+}
+
 .App {
-	background-color: rgb(243, 241, 235);
+  background-color: rgb(243, 241, 235);
+  
   }
   h1,
   h2,
@@ -22,8 +27,11 @@
   }
   .headerIcon {
 	font-size: 1rem;
-	text-align: justify;
-  
+  text-align: justify;
+  margin-left: 200px;
+  }
+  .priority {
+    text-align: center;
   }
   .headerText {
 	align-content: left ;
@@ -38,5 +46,36 @@
 	border-radius:5px;
   }
   
-  
+  .slider {
+    margin-top: 50px;
+    margin-bottom: 100px;
+  }
+  .timekeeper {
+    justify-content: center;
+  }
+
+  .Buttonarray {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+  .inputfield {
+    display: flex;
+    justify-content: center;
+  }
+  .submitbutton {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  .completed {
+    text-align: center;
+    color: gray;
+  }
+  .today {
+    display: flex;
+    justify-content: center;
+    margin-right: 50px;
+  }
   

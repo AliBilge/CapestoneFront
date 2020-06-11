@@ -17,7 +17,6 @@ class BreakTimer extends Component {
                             <Timer.Seconds /> seconds
                   <br /><br />
                         </Container>
-
                         <Button.Group size='large'>
                             <button className=" ui orange button" onClick={start}>
                                 <i className="play icon"></i>
@@ -28,8 +27,7 @@ class BreakTimer extends Component {
                                 <button className="ui orange button" onClick={reset}>
                                     <i className="repeat icon"></i>
                                 </button>
-                            </Button.Group>
-                        
+                            </Button.Group>                  
                     </React.Fragment>
                 )}
 </Timer>

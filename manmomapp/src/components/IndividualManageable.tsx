@@ -5,11 +5,12 @@ import { ThunkDispatch } from 'redux-thunk';
 import { RootState } from '../store';
 import { AppActions } from '../models/action';
 import { 
-    toggledDoneStatusForManageable, 
-    updatingAllManageable, 
-    deleteManageable 
-} from '../store/actions';
+        toggledDoneStatusForManageable, 
+        updatingAllManageable, 
+        deleteManageable 
+        } from '../store/actions';
 import { connect } from 'react-redux';
+import '../App.css';
 
 export interface IIndividualManageableItemProps {
     manageableItem: ManageableItem;
@@ -43,25 +44,35 @@ export class IndividualManageableItem extends React.Component<Props> {
     }
 
     public render() {
-        let {manageableItem} = this.props;
+        let {manageableItem} = this.props; 
         return (
             <div>
                 <div className="ui segment">
-                    <h3>{`${manageableItem.title}`}</h3>
-                    <p>{`Competed : ${manageableItem.isDone}`} </p>
+                    <h4>{`${manageableItem.title}`}</h4>
+                    <p className="completed">{`Competed : ${manageableItem.isDone}`} </p>
                 </div>
-                <Button className="tiny orange ui button"
+                <div className="Buttonarray">
+                    <div>
+                    <Button className="tiny orange ui button"
                     onClick={() => this.UpdateContent(manageableItem)}>
                     Priority
-                </Button>
-                <Button className="tiny orange ui button" 
+                    </Button>
+                    </div>
+                    
+                    <div>
+                    <Button className="tiny orange ui button" 
                     onClick={() => this.ToggleContent(manageableItem.id)}>
                     Completed
-                </Button>
-                <Button className="tiny orange ui button" 
+                    </Button>
+                    </div>
+                
+                    <div>
+                    <Button className="tiny orange ui button" 
                     onClick={() => this.deleteManageableItem(manageableItem.id)}>
                     Delete
-                </Button>
+                    </Button>
+                    </div>
+                </div>
             </div>   
         );
     }
