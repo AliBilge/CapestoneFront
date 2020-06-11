@@ -48,24 +48,20 @@ export class App extends React.Component<Props> {
       manageableLoop = [<React.Fragment />]
     }
 
-    return (
+      return (
+
       <React.Fragment>
-
-        <div className="App">
-      <div className="ui padded grid container">
-        <div className="five wide column"></div>
-        <div className="two wide column">
+        <Grid container columns={8}>  
+      <Grid.Row></Grid.Row>
+        <Grid.Column className="headerIcon">
           <i className="calendar check outline icon massive"></i>
-        </div>
-        <div className="six wide column">
+        </Grid.Column>
+        <Grid.Column>
           <h1> Manageable Moments</h1>
-        </div>
-        <div className="six wide column"></div>
-      </div>
-
-{/*  ===============  Date slider  =====================*/}
-<div className="ui grid container">
-        
+        </Grid.Column>
+        <Grid.Column></Grid.Column>
+      </Grid>
+      {/*  ===============  Date slider  =====================*/}
       <Grid container columns={5}> 
         <Grid.Column></Grid.Column>
         <Grid.Column>
@@ -74,7 +70,7 @@ export class App extends React.Component<Props> {
           </button>
         </Grid.Column>
         <Grid.Column>
-          <Picker />
+        <Picker />
           <h2> Today's Date </h2>
         </Grid.Column>
         <Grid.Column>
@@ -84,12 +80,11 @@ export class App extends React.Component<Props> {
         </Grid.Column>
         <Grid.Column></Grid.Column>
       </Grid>
-
- {/*  ===============  Timers task block =====================*/}
- <Grid container columns={5} stackable>
+      {/*  ===============  Timers task block =====================*/}
+      <Grid container columns={5} stackable>
         <Grid.Column></Grid.Column>
         <Grid.Column className="timer">
-          < BreakTimer /><h4>BREAK TIME</h4>
+          <BreakTimer /><h4>BREAK TIME</h4>
           </Grid.Column>
           <Grid.Column></Grid.Column>
           <Grid.Column className="timer">
@@ -98,45 +93,40 @@ export class App extends React.Component<Props> {
         <Grid.Column></Grid.Column>
       </Grid>
 
-        <div className="ui grid container">
-          <div className="six wide column"></div>
-          <div className="six wide column">
-            
-          </div>
-            
-          <div className="ui grid container">
-            <div className="four wide column"></div>
-
-            <div className="eight wide column">
-              <div className="ui raised segments">
-                <div className="ui segment">
-                  <h4>Today's Priority Task</h4>
-                </div>
-                <div className="ui segment">
-                  <p>Finish website </p>
-                </div>
-              </div>
+      {/*  ===============  Priority task block =====================*/}
+      <Grid container columns={3} stackable>
+        <Grid.Column></Grid.Column>
+        <Grid.Column>
+          <div className="ui raised segments">
+            <div className="ui segment">
+              <h4>Today's Priority Task</h4>
             </div>
-            
-            <div className="ui grid container">
-              <div className="four wide column"></div>
-              <div className="eight wide column ui button segment">
-                <div className="ui raised segments">
-                  <div className="ui segment">
-                    <h4>Additional Tasks</h4>
-                  </div>
+            <div className="ui segment">
+              <p>Finish website </p>
+            </div>
+          </div>
+        </Grid.Column>
+        <Grid.Column></Grid.Column>
+      </Grid>
 
-      {/** Formic added from here */}
-                  <div>
-                  {manageableLoop}
-                  </div>
+      {/*  ===============  Additional tasks block =====================*/}
+      <Grid container columns={3} stackable>
+        <Grid.Column></Grid.Column>
+        <Grid.Column>
+          <div className="ui raised segments">
+            <div className="ui segment">
+              <h4>Additional Tasks</h4>
+            </div>
+           {/** Formic added from here */}
+           <div>
+              {manageableLoop}
+            </div>
             <Formik
               initialValues = {{
                 id: "0",
                 isDone: false,
                 title: ""
               }}
-
               onSubmit={(data: ManageableItem) => {
                 this.createNewManageable(data);
               }}>
@@ -153,20 +143,17 @@ export class App extends React.Component<Props> {
                     </div>
                   </Form>
                 )}
-
             </Formik>   
-                </div>
-              </div>
-            </div>
-            <div className="ui grid container">
-              <div className="six wide column"></div>
-              <div className="five wide column"><h4>Designed by Code Warriors<br/>2020</h4></div>
-              <div className="six wide column"></div>
-            </div>
           </div>
-        </div>
-      </div>
-      </div>
+        </Grid.Column>
+        <Grid.Column></Grid.Column>
+      </Grid>
+
+      <Grid container columns={3}>
+        <Grid.Column></Grid.Column>
+        <Grid.Column><h4>Designed by Code Warriors<br />2020</h4></Grid.Column>
+        <Grid.Column></Grid.Column>
+      </Grid>
       </React.Fragment>
         
     );
